@@ -1,6 +1,7 @@
 "use client";
-
+ 
 import { portfolioConfig } from "@/data/portfolio";
+import { useLang } from "@/lib/lang-context";
 import { KeyboardButton } from "./keyboard-button";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Mail } from "lucide-react";
@@ -57,7 +58,8 @@ function Cross({ className }: { className?: string }) {
 }
 
 function TypingEffect() {
-  const words = portfolioConfig.typingWords;
+  const { lang } = useLang();
+  const words = lang.typingWords;
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [phase, setPhase] = useState<"typing" | "pausing" | "deleting">("typing");
@@ -69,9 +71,7 @@ function TypingEffect() {
     if (phase === "typing") {
       charIndex.current += 1;
       setDisplayText(word.slice(0, charIndex.current));
-      if (charIndex.current >= word.length) {
-        setPhase("pausing");
-      }
+      if (charIndex.current >= word.length) setPhase("pausing");
     } else if (phase === "deleting") {
       charIndex.current -= 1;
       setDisplayText(word.slice(0, charIndex.current));
@@ -89,11 +89,8 @@ function TypingEffect() {
     else delay = 40;
 
     const timer = window.setTimeout(() => {
-      if (phase === "pausing") {
-        setPhase("deleting");
-      } else {
-        tick();
-      }
+      if (phase === "pausing") setPhase("deleting");
+      else tick();
     }, delay);
 
     return () => window.clearTimeout(timer);
@@ -139,6 +136,8 @@ const floatingStickers = [
 ];
 
 export function Hero() {
+  const { lang } = useLang();
+
   return (
     <section className="min-h-screen flex items-center pt-16">
       <div className="mx-auto max-w-6xl w-full px-6 py-12">
@@ -151,7 +150,7 @@ export function Hero() {
           >
             <div className="neo-border inline-block rounded-lg bg-neo-accent px-3 py-1 mb-4">
               <span className="text-sm font-bold text-neo-accent-foreground">
-                {portfolioConfig.pronouns} &middot; {portfolioConfig.location}
+                {lang.pronouns} &middot; {portfolioConfig.location}
               </span>
             </div>
 
@@ -160,29 +159,29 @@ export function Hero() {
             </h1>
 
             <h2 className="text-2xl md:text-3xl font-bold uppercase mb-2">
-              {portfolioConfig.title}
+              {lang.title}
             </h2>
 
             <p className="text-xl md:text-2xl font-bold mb-6">
-              {portfolioConfig.subtitle}{" "}
+              {lang.subtitle}{" "}
               <TypingEffect />
             </p>
 
             <p className="text-muted-foreground text-lg mb-8 max-w-lg">
-              {portfolioConfig.bio}
+              {lang.bio}
             </p>
 
             <div className="flex flex-wrap gap-4">
               <a href="#cv">
                 <KeyboardButton variant="default" size="lg">
                   <Download className="h-5 w-5" />
-                  Download CV
+                  {lang.buttons.downloadCV}
                 </KeyboardButton>
               </a>
               <a href="#contact">
                 <KeyboardButton variant="accent" size="lg">
                   <Mail className="h-5 w-5" />
-                  Contact Me
+                  {lang.buttons.contact}
                 </KeyboardButton>
               </a>
             </div>
@@ -204,7 +203,6 @@ export function Hero() {
                   priority
                 />
               </div>
-
               {floatingStickers.map(({ Shape, pos, color, size, delay, rotate }, i) => (
                 <motion.div
                   key={i}
