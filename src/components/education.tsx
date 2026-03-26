@@ -1,10 +1,11 @@
 "use client";
-
-import { portfolioConfig } from "@/data/portfolio";
+import { useLang } from "@/lib/lang-context";
 import { motion } from "framer-motion";
-import { GraduationCap, BookOpen, Globe } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 
 export function Education() {
+  const { lang, langCode } = useLang();
+
   return (
     <section id="education" className="py-20">
       <div className="mx-auto max-w-6xl px-6">
@@ -14,115 +15,80 @@ export function Education() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="neo-border rounded-lg bg-neo-orange p-2">
-                  <GraduationCap className="h-6 w-6 text-white" />
-                </div>
-                <h2 className="text-3xl font-black uppercase">Education</h2>
-              </div>
-              <div className="space-y-4">
-                {portfolioConfig.education.map((edu, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="neo-card"
-                  >
-                    <h3 className="font-black text-lg uppercase">{edu.degree}</h3>
-                    {edu.honors && (
-                      <span className="neo-border inline-block rounded bg-neo-accent px-2 py-0.5 text-xs font-bold mt-1">
-                        {edu.honors}
+          <div className="flex items-center gap-3 mb-10">
+            <div className="neo-border rounded-lg bg-neo-yellow p-2">
+              <GraduationCap className="h-6 w-6 text-foreground" />
+            </div>
+            <h2 className="text-4xl font-black uppercase">
+              {langCode === "fr" ? "Formation" : "Education"}
+            </h2>
+          </div>
+          <div className="grid gap-6">
+            {lang.education.map((edu, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="neo-card"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="neo-border inline-block rounded px-2 py-0.5 bg-neo-yellow mb-2">
+                      <span className="text-xs font-bold text-foreground">
+                        {edu.startDate} — {edu.endDate}
                       </span>
-                    )}
-                    <p className="text-sm font-medium text-muted-foreground mt-2">
-                      {edu.school}
-                    </p>
-                    <p className="text-xs font-bold text-muted-foreground mt-1">
-                      {edu.startDate} — {edu.endDate}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="neo-border rounded-lg bg-neo-green p-2">
-                  <BookOpen className="h-6 w-6 text-neo-accent-foreground" />
-                </div>
-                <h2 className="text-3xl font-black uppercase">Courses</h2>
-              </div>
-              <div className="space-y-4">
-                {portfolioConfig.courses.map((course, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="neo-card"
-                  >
-                    <h3 className="font-black text-sm uppercase">{course.name}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{course.provider}</p>
-                    <span className="neo-border inline-block rounded bg-secondary px-2 py-0.5 text-xs font-bold mt-2">
-                      {course.year}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="neo-border rounded-lg bg-neo-blue p-2">
-                  <Globe className="h-6 w-6 text-white" />
-                </div>
-                <h2 className="text-3xl font-black uppercase">Languages</h2>
-              </div>
-              <div className="space-y-4">
-                {portfolioConfig.languages.map((lang, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="neo-card flex items-center justify-between"
-                  >
-                    <h3 className="font-black text-sm uppercase">{lang.language}</h3>
-                    <span className="neo-border rounded bg-foreground text-background px-3 py-1 text-xs font-black">
-                      {lang.level}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="mt-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="neo-border rounded-lg bg-neo-pink p-2">
-                    <BookOpen className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-black uppercase">{edu.degree}</h3>
+                    <p className="text-sm font-bold text-muted-foreground">{edu.school}</p>
                   </div>
-                  <h2 className="text-3xl font-black uppercase">Tools</h2>
                 </div>
-                <div className="flex flex-wrap gap-3">
-                  {portfolioConfig.programs.map((program, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: index * 0.05 }}
-                      className="neo-border rounded-lg bg-card p-3 neo-shadow-sm flex items-center gap-2"
-                    >
-                      <span className="text-sm font-black">{program.name}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-12">
+            <h3 className="text-2xl font-black uppercase mb-6">
+              {langCode === "fr" ? "Certifications" : "Courses"}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {lang.courses.map((course, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="neo-card"
+                >
+                  <p className="font-black uppercase text-sm">{course.name}</p>
+                  <p className="text-xs font-bold text-muted-foreground mt-1">{course.provider} — {course.year}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12">
+            <h3 className="text-2xl font-black uppercase mb-6">
+              {langCode === "fr" ? "Langues" : "Languages"}
+            </h3>
+            <div className="flex gap-4 flex-wrap">
+              {lang.languages.map((l, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="neo-card flex items-center gap-3"
+                >
+                  <span className="font-black uppercase">{l.language}</span>
+                  <div className="neo-border rounded px-2 py-0.5 bg-neo-green">
+                    <span className="text-xs font-bold">{l.level}</span>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </motion.div>

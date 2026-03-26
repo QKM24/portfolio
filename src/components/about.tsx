@@ -1,10 +1,13 @@
 "use client";
-
 import { portfolioConfig } from "@/data/portfolio";
+import { useLang } from "@/lib/lang-context";
 import { motion } from "framer-motion";
-import { MapPin, AtSign, Phone, Mail, User, Github, Linkedin } from "lucide-react";
+import { User } from "lucide-react";
+import { Github, Linkedin, Mail, Phone } from "lucide-react";
 
 export function About() {
+  const { lang, langCode } = useLang();
+
   return (
     <section id="about" className="py-20">
       <div className="mx-auto max-w-6xl px-6">
@@ -15,75 +18,53 @@ export function About() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex items-center gap-3 mb-10">
-            <div className="neo-border rounded-lg bg-neo-blue p-2">
-              <User className="h-6 w-6 text-white" />
+            <div className="neo-border rounded-lg bg-neo-orange p-2">
+              <User className="h-6 w-6 text-foreground" />
             </div>
-            <h2 className="text-4xl font-black uppercase">About Me</h2>
+            <h2 className="text-4xl font-black uppercase">
+              {langCode === "fr" ? "À propos" : "About Me"}
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2 neo-card">
-              <p className="text-lg leading-relaxed">
-                {portfolioConfig.bio}
-              </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="neo-card">
+              <p className="text-lg leading-relaxed">{lang.bio}</p>
+              <div className="mt-4 flex gap-2 flex-wrap">
+                <span className="neo-border rounded px-2 py-0.5 bg-neo-accent text-sm font-bold">
+                  {portfolioConfig.location}
+                </span>
+                <span className="neo-border rounded px-2 py-0.5 bg-neo-accent text-sm font-bold">
+                  {lang.pronouns}
+                </span>
+              </div>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <div className="neo-card bg-neo-accent">
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
-                    <span className="font-bold text-sm">{portfolioConfig.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-xs bg-foreground text-background px-2 py-0.5 rounded">
-                      {portfolioConfig.pronouns}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="neo-card">
-                <h3 className="font-black text-sm uppercase mb-3">Contacts</h3>
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2">
-                    <Mail className="h-4 w-4" />
-                    <span className="text-sm font-medium break-all">
-                      {portfolioConfig.contacts.email}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="h-4 w-4" />
-                    <span className="text-sm font-medium">
-                      {portfolioConfig.contacts.phone}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <AtSign className="h-4 w-4" />
-                    <span className="text-sm font-medium">
-                      {portfolioConfig.contacts.social}
-                    </span>
-                  </div>
-                  <a
-                    href={portfolioConfig.contacts.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 hover:text-neo-blue transition-colors"
-                  >
-                    <Github className="h-4 w-4" />
-                    <span className="text-sm font-medium">GitHub</span>
+            <div className="neo-card">
+              <h3 className="text-xl font-black uppercase mb-4">
+                {langCode === "fr" ? "Contacts" : "Contacts"}
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-center gap-2 text-sm font-bold">
+                  <Mail className="h-4 w-4" />
+                  {portfolioConfig.contacts.email}
+                </li>
+                <li className="flex items-center gap-2 text-sm font-bold">
+                  <Phone className="h-4 w-4" />
+                  {portfolioConfig.contacts.phone}
+                </li>
+                <li className="flex items-center gap-2 text-sm font-bold">
+                  <Github className="h-4 w-4" />
+                  <a href={portfolioConfig.contacts.github} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    GitHub
                   </a>
-                  <a
-                    href={portfolioConfig.contacts.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 hover:text-neo-blue transition-colors"
-                  >
-                    <Linkedin className="h-4 w-4" />
-                    <span className="text-sm font-medium">LinkedIn</span>
+                </li>
+                <li className="flex items-center gap-2 text-sm font-bold">
+                  <Linkedin className="h-4 w-4" />
+                  <a href={portfolioConfig.contacts.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    LinkedIn
                   </a>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
           </div>
         </motion.div>

@@ -1,25 +1,36 @@
+import { image, img } from "framer-motion/client";
+import { Github } from "lucide-react";
+import { title } from "process";
+
 export const portfolioConfig = {
-  name: "John Doe",
-  title: "Full-Stack Developer",
+  name: "Khouloud Mrabtini",
+  title: "Développeuse Full-Stack",
   subtitle: "I build awesome:",
   typingWords: ["Web Apps", "APIs", "Experiences", "Solutions"],
-  pronouns: "he/him",
+  pronouns: "she/her",
   location: "Paris, France",
-  bio: "Hi! I'm a passionate full-stack developer who loves building elegant, performant web applications. I thrive on turning complex problems into simple, beautiful solutions and I'm always eager to learn new technologies.",
-  profileImage: "/profile.svg",
+  bio: "Développeuse full-stack passionnée, je crée des applications web élégantes et performantes. J'aime transformer des problèmes complexes en solutions simples et intuitives, et je suis toujours en quête de nouvelles technologies à explorer.",
+  _profileImage: "/khoukha.jpg",
+  get profileImage() {
+    return this._profileImage;
+  },
+  set profileImage(value) {
+    this._profileImage = value;
+  },
   cvFile: "/cv.pdf",
 
   contacts: {
-    email: "john.doe@example.com",
-    phone: "+33 6 12 34 56 78",
-    social: "@johndoe",
-    github: "https://github.com/johndoe",
-    linkedin: "https://www.linkedin.com/in/johndoe",
+    email: "mrabtinikhouloud@gmail.com",
+    phone: "+33 6 60 06 73 80",
+    social: "@khouloudmrabtini",
+    github: "https://github.com/QKM24",
+    linkedin: "https://www.linkedin.com/in/khouloud-mrabtini-9480b2274/",
   },
 
   navLinks: [
     { label: "About", href: "#about" },
     { label: "Experience", href: "#experience" },
+    { label: "Projects", href: "#projects" },
     { label: "Skills", href: "#skills" },
     { label: "Education", href: "#education" },
     { label: "CV", href: "#cv" },
@@ -28,44 +39,58 @@ export const portfolioConfig = {
 
   experience: [
     {
-      role: "Senior Full-Stack Developer",
-      company: "TechCorp",
-      location: "Paris, France",
-      startDate: "Jan 2023",
-      endDate: "Present",
-      tasks: [
-        "Led development of a micro-services architecture serving 100k+ users",
-        "Built real-time dashboards with Next.js and WebSocket integration",
-        "Mentored a team of 4 junior developers on best practices",
-        "Reduced API response times by 60% through query optimization",
-      ],
-    },
-    {
       role: "Full-Stack Developer",
-      company: "StartupXYZ",
-      location: "Lyon, France",
-      startDate: "Mar 2021",
-      endDate: "Dec 2022",
+      company: "Fiverr",
+      location: "Paris, France",
+      startDate: "2024",
+      endDate: "2026",
       tasks: [
-        "Developed and maintained a SaaS platform using React and Node.js",
-        "Implemented CI/CD pipelines reducing deployment time by 75%",
-        "Designed and built RESTful APIs consumed by mobile and web clients",
-        "Integrated third-party payment and analytics services",
+      "Design and development of full stack websites and web applications in PHP and MySQL. Creation of dynamic interfaces using HTML, CSS, JavaScript, and React.",
+      "Implementation of back-end features (CRUD, data management, authentication) with MVC architecture structuring.",
+      "Version control with Git and Docker environment setup to ensure project portability."
       ],
     },
     {
-      role: "Junior Developer",
-      company: "WebAgency",
-      location: "Paris, France",
-      startDate: "Sep 2019",
-      endDate: "Feb 2021",
+      role: "STAGE DE DEVELOPPEUR WEB",
+      company: "Future Plumbing",
+      location: "Nice, France",
+      startDate: "Jun 2024",
+      endDate: " Aug 2024",
       tasks: [
-        "Built responsive websites for 20+ clients using modern frameworks",
-        "Collaborated with designers to implement pixel-perfect UIs",
-        "Maintained legacy PHP applications and migrated them to React",
+      "Participation in the development of a complete web application with front-end and back-end separation.",
+      "Development of business logic features in PHP and MySQL database management.",
+      "Integration of interactive interfaces in JavaScript and form security implementation.",
+      "Performing tests, debugging, and evolutive maintenance."
       ],
     },
   ],
+
+projects: [
+    {
+      title: "Swipe",
+      description: "Application de mode seconde mains style Tinder, permettant aux utilisateurs de faire du shopping de manière ludique et interactive.",
+      stack: ["React.js", "Node.js", "MongoDB", "TypeScript"],
+      github: "https://github.com/QKM24/swipe",
+      demo:"",
+      status: "En cours de développement",
+    },
+    {
+      title: "Portfolio",
+      description: "Mon portfolio personnel, conçu pour présenter mes compétences, expériences et projets de manière élégante et professionnelle.",
+      stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+      github: "https://github.com/QKM24/portfolio",
+      demo: "",
+      status: "Terminé",
+    },
+    {
+      title: "Mymoni",
+    description: "Application de gestion de budget avec une identité visuelle féminine et dynamique. Suivi des dépenses, revenus et objectifs financiers.",
+    stack: ["React.js", "Tailwind CSS", "Firebase"],
+    github: "https://github.com/QKM24",
+    demo: "",
+    status: "Terminé",
+    },
+    ],
 
   skills: {
     soft: [
@@ -94,25 +119,25 @@ export const portfolioConfig = {
 
   education: [
     {
-      degree: "Master of Computer Science",
-      honors: "With Honours",
-      school: "University of Paris",
-      startDate: "Sep 2017",
-      endDate: "Jun 2019",
+      degree: "Bachelor of engineering web",
+      honors: "",
+      school: "Esgi",
+      startDate: "Jan 2026",
+      endDate: "Jan 2027",
     },
     {
-      degree: "Bachelor of Computer Science",
+      degree: "HND of Web Development",
       honors: "",
-      school: "University of Lyon",
-      startDate: "Sep 2014",
-      endDate: "Jun 2017",
+      school: "Studi",
+      startDate: "Sep 2023",
+      endDate: "Jun 2025",
     },
   ],
 
   courses: [
-    { name: "Advanced React Patterns", provider: "Frontend Masters", year: "2023" },
-    { name: "System Design", provider: "Educative", year: "2022" },
-    { name: "AWS Solutions Architect", provider: "AWS Training", year: "2021" },
+    { name: "Advanced React Patterns", provider: "Frontend Masters", year: "2024" },
+    { name: "System Design", provider: "Educative", year: "2024" },
+    { name: "Power BI", provider: "Microsoft", year: "2025" },
   ],
 
   programs: [
